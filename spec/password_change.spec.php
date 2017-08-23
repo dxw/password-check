@@ -106,7 +106,7 @@ describe(\HibpCheck\PasswordChange::class, function () {
                 $this->errors = \Mockery::mock(\WP_Error::class, function ($mock) {
                     $mock->shouldReceive('add')
                     ->once()
-                    ->with('name', 'message');
+                    ->with('hibp-check-found', 'Password has been found in a dump. Please choose another.');
                 });
                 $this->passwordChange->userProfileUpdateErrors($this->errors, null, $this->user);
             });

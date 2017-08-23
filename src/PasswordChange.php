@@ -33,6 +33,6 @@ class PasswordChange implements \Dxw\Iguana\Registerable
             return;
         }
 
-        $errors->add('name', 'message');
+        $errors->add('hibp-check-found', 'Password has been found in a dump. Please choose another.');
     }
 }
