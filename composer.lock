@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c079e4a89afe761290cebe4dc9b7adc",
+    "content-hash": "b020e461230df15aa696a8cfb8a77f69",
     "packages": [
         {
             "name": "aura/autoload",
@@ -422,6 +422,54 @@
             ],
             "homepage": "https://github.com/dxw/phar-install",
             "time": "2016-02-17T13:55:06+00:00"
+        },
+        {
+            "name": "errors/exceptions",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-errors/exceptions.git",
+                "reference": "8115762ac206196d355f644de4b4623fa81d27f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-errors/exceptions/zipball/8115762ac206196d355f644de4b4623fa81d27f2",
+                "reference": "8115762ac206196d355f644de4b4623fa81d27f2",
+                "shasum": ""
+            },
+            "conflict": {
+                "errors/native": "*"
+            },
+            "require-dev": {
+                "errors/specification": "^0.1"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/handler.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Erin Millard",
+                    "email": "ezzatron@gmail.com",
+                    "homepage": "http://ezzatron.com/"
+                }
+            ],
+            "description": "An error handler that produces error exceptions when a native error occurs.",
+            "homepage": "https://github.com/php-errors/exceptions",
+            "keywords": [
+                "error",
+                "errorexception",
+                "errors",
+                "exception",
+                "handler"
+            ],
+            "time": "2017-07-03T23:04:46+00:00"
         },
         {
             "name": "evenement/evenement",

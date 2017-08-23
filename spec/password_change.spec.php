@@ -43,6 +43,30 @@ describe(\HibpCheck\PasswordChange::class, function () {
             });
         });
 
+        context('when API is down', function () {
+            beforeEach(function () {
+                $this->user = \Mockery::mock(\WP_User::class, function ($mock) {
+                    $mock->user_pass = 'good password';
+                });
+                $this->hibpApi = \Mockery::mock(\HibpCheck\HibpApi::class, function ($mock) {
+                    $mock->shouldReceive('passwordIsPwned')
+                    ->with('good password')
+                    ->andReturn(\Dxw\Result\Result::err('the api is down oh no'));
+                });
+                $this->passwordChange = new \HibpCheck\PasswordChange($this->hibpApi);
+            });
+
+            it('does nothing (and produces warning)', function () {
+                $this->errors = \Mockery::mock(\WP_Error::class, function ($mock) {
+                    $mock->shouldReceive('add')
+                    ->never();
+                });
+                expect(function () {
+                    $this->passwordChange->userProfileUpdateErrors($this->errors, null, $this->user);
+                })->to->throw(\ErrorException::class, 'API error: the api is down oh no');
+            });
+        });
+
         context('when password is good', function () {
             beforeEach(function () {
                 $this->user = \Mockery::mock(\WP_User::class, function ($mock) {

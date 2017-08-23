@@ -23,7 +23,8 @@ class PasswordChange implements \Dxw\Iguana\Registerable
 
         $result = $this->hibpApi->passwordIsPwned($user->user_pass);
         if ($result->isErr()) {
-            //TODO: produce a warning
+            $message = $result->wrap('API error')->getErr();
+            trigger_error($message, E_USER_WARNING);
             return;
         }
         $passwordIsPwned = $result->unwrap();
