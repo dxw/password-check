@@ -22,24 +22,17 @@ class PasswordChange implements \Dxw\Iguana\Registerable
             return;
         }
 
-        $result = $this->hibpApi->passwordIsPwned($user->user_pass);
-        if ($result->isErr()) {
-            $message = $result->wrap('API error')->getErr();
-            trigger_error($message, E_USER_WARNING);
-            return;
-        }
-        $passwordIsPwned = $result->unwrap();
-
-        if (!$passwordIsPwned) {
-            return;
-        }
-
-        $errors->add('hibp-check-found', 'Password has been found in a dump. Please choose another.');
+        $this->checkPass($errors, $user->user_pass);
     }
 
     public function validatePasswordReset(\WP_Error $errors, \WP_User $user)
     {
-        $result = $this->hibpApi->passwordIsPwned($this->post['pass1']);
+        $this->checkPass($errors, $this->post['pass1']);
+    }
+
+    private function checkPass(\WP_Error $errors, string $password)
+    {
+        $result = $this->hibpApi->passwordIsPwned($password);
         if ($result->isErr()) {
             $message = $result->wrap('API error')->getErr();
             trigger_error($message, E_USER_WARNING);
