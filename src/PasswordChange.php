@@ -4,9 +4,10 @@ namespace HibpCheck;
 
 class PasswordChange implements \Dxw\Iguana\Registerable
 {
-    public function __construct(HibpApi $hibpApi)
+    public function __construct(HibpApi $hibpApi, \Dxw\Iguana\Value\Post $__post)
     {
         $this->hibpApi = $hibpApi;
+        $this->post = $__post;
     }
 
     public function register()
@@ -22,6 +23,23 @@ class PasswordChange implements \Dxw\Iguana\Registerable
         }
 
         $result = $this->hibpApi->passwordIsPwned($user->user_pass);
+        if ($result->isErr()) {
+            $message = $result->wrap('API error')->getErr();
+            trigger_error($message, E_USER_WARNING);
+            return;
+        }
+        $passwordIsPwned = $result->unwrap();
+
+        if (!$passwordIsPwned) {
+            return;
+        }
+
+        $errors->add('hibp-check-found', 'Password has been found in a dump. Please choose another.');
+    }
+
+    public function validatePasswordReset(\WP_Error $errors, \WP_User $user)
+    {
+        $result = $this->hibpApi->passwordIsPwned($this->post['pass1']);
         if ($result->isErr()) {
             $message = $result->wrap('API error')->getErr();
             trigger_error($message, E_USER_WARNING);

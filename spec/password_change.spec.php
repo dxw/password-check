@@ -7,7 +7,7 @@ describe(\HibpCheck\PasswordChange::class, function () {
         $this->hibpApi = \Mockery::mock(\HibpCheck\HibpApi::class, function ($mock) {
             $mock->shouldReceive('passwordIsPwned');
         });
-        $this->passwordChange = new \HibpCheck\PasswordChange($this->hibpApi);
+        $this->passwordChange = new \HibpCheck\PasswordChange($this->hibpApi, new \Dxw\Iguana\Value\Post([]));
     });
 
     afterEach(function () {
@@ -53,7 +53,7 @@ describe(\HibpCheck\PasswordChange::class, function () {
                     ->with('good password')
                     ->andReturn(\Dxw\Result\Result::err('the api is down oh no'));
                 });
-                $this->passwordChange = new \HibpCheck\PasswordChange($this->hibpApi);
+                $this->passwordChange = new \HibpCheck\PasswordChange($this->hibpApi, new \Dxw\Iguana\Value\Post([]));
             });
 
             it('does nothing (and produces warning)', function () {
@@ -77,7 +77,7 @@ describe(\HibpCheck\PasswordChange::class, function () {
                     ->with('good password')
                     ->andReturn(\Dxw\Result\Result::ok(false));
                 });
-                $this->passwordChange = new \HibpCheck\PasswordChange($this->hibpApi);
+                $this->passwordChange = new \HibpCheck\PasswordChange($this->hibpApi, new \Dxw\Iguana\Value\Post([]));
             });
 
             it('does nothing', function () {
@@ -99,7 +99,7 @@ describe(\HibpCheck\PasswordChange::class, function () {
                     ->with('bad password')
                     ->andReturn(\Dxw\Result\Result::ok(true));
                 });
-                $this->passwordChange = new \HibpCheck\PasswordChange($this->hibpApi);
+                $this->passwordChange = new \HibpCheck\PasswordChange($this->hibpApi, new \Dxw\Iguana\Value\Post([]));
             });
 
             it('complains', function () {
@@ -114,7 +114,73 @@ describe(\HibpCheck\PasswordChange::class, function () {
     });
 
     describe('->validatePasswordReset()', function () {
-        xit('todo', function () {
+        context('when API is down', function () {
+            beforeEach(function () {
+                $this->user = \Mockery::mock(\WP_User::class);
+                $this->hibpApi = \Mockery::mock(\HibpCheck\HibpApi::class, function ($mock) {
+                    $mock->shouldReceive('passwordIsPwned')
+                    ->with('good password')
+                    ->andReturn(\Dxw\Result\Result::err('the api is down oh no'));
+                });
+                $this->passwordChange = new \HibpCheck\PasswordChange($this->hibpApi, new \Dxw\Iguana\Value\Post([
+                    'pass1' => 'good password',
+                ]));
+            });
+
+            it('does nothing (and produces warning)', function () {
+                $this->errors = \Mockery::mock(\WP_Error::class, function ($mock) {
+                    $mock->shouldReceive('add')
+                    ->never();
+                });
+                expect(function () {
+                    $this->passwordChange->validatePasswordReset($this->errors, $this->user);
+                })->to->throw(\ErrorException::class, 'API error: the api is down oh no');
+            });
+        });
+
+        context('when password is good', function () {
+            beforeEach(function () {
+                $this->user = \Mockery::mock(\WP_User::class);
+                $this->hibpApi = \Mockery::mock(\HibpCheck\HibpApi::class, function ($mock) {
+                    $mock->shouldReceive('passwordIsPwned')
+                    ->with('good password')
+                    ->andReturn(\Dxw\Result\Result::ok(false));
+                });
+                $this->passwordChange = new \HibpCheck\PasswordChange($this->hibpApi, new \Dxw\Iguana\Value\Post([
+                    'pass1' => 'good password',
+                ]));
+            });
+
+            it('does nothing', function () {
+                $this->errors = \Mockery::mock(\WP_Error::class, function ($mock) {
+                    $mock->shouldReceive('add')
+                    ->never();
+                });
+                $this->passwordChange->validatePasswordReset($this->errors, $this->user);
+            });
+        });
+
+        context('when password is bad', function () {
+            beforeEach(function () {
+                $this->user = \Mockery::mock(\WP_User::class);
+                $this->hibpApi = \Mockery::mock(\HibpCheck\HibpApi::class, function ($mock) {
+                    $mock->shouldReceive('passwordIsPwned')
+                    ->with('bad password')
+                    ->andReturn(\Dxw\Result\Result::ok(true));
+                });
+                $this->passwordChange = new \HibpCheck\PasswordChange($this->hibpApi, new \Dxw\Iguana\Value\Post([
+                    'pass1' => 'bad password',
+                ]));
+            });
+
+            it('complains', function () {
+                $this->errors = \Mockery::mock(\WP_Error::class, function ($mock) {
+                    $mock->shouldReceive('add')
+                    ->once()
+                    ->with('hibp-check-found', 'Password has been found in a dump. Please choose another.');
+                });
+                $this->passwordChange->validatePasswordReset($this->errors, $this->user);
+            });
         });
     });
 });
