@@ -118,6 +118,18 @@ describe(\HibpCheck\PasswordChange::class, function () {
             });
         });
 
+        context('when password is unset', function () {
+            beforeEach(function () {
+                $this->mockUser(null);
+                $this->mockPasswordChange(\Dxw\Result\Result::ok(false), []);
+            });
+
+            it('does nothing', function () {
+                $this->mockErrors([]);
+                $this->passwordChange->validatePasswordReset($this->errors, $this->user);
+            });
+        });
+
         context('when password is good', function () {
             beforeEach(function () {
                 $this->mockUser(null);

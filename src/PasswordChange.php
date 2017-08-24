@@ -25,8 +25,12 @@ class PasswordChange implements \Dxw\Iguana\Registerable
         $this->checkPass($errors, $user->user_pass);
     }
 
-    public function validatePasswordReset(\WP_Error $errors, $user)
+    public function validatePasswordReset(\WP_Error $errors, $unused)
     {
+        if (!isset($this->post['pass1'])) {
+            return;
+        }
+
         $this->checkPass($errors, $this->post['pass1']);
     }
 
