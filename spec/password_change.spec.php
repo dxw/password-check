@@ -34,7 +34,7 @@ describe(\HibpCheck\PasswordChange::class, function () {
         };
 
         \WP_Mock::wpFunction('__', [
-            'args' => ['Password has been found in a dump. Please choose another.', 'hibp-check'],
+            'args' => ['<strong>ERROR</strong>: This password has been found on a list of publicly known passwords.', 'hibp-check'],
             'return' => 'l10n password message',
         ]);
     });
