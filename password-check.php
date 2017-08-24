@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: HIBP Check
-Plugin URI: https://github.com/dxw/hibp-check
+Plugin Name: Password Check
+Plugin URI: https://github.com/dxw/password-check
 Description: Checks passwords against haveibeenpwned.com, preventing users from using breached passwords
 Version: 0.1.0
 Author: dxw

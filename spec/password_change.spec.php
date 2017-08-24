@@ -1,19 +1,19 @@
 <?php
 
-describe(\HibpCheck\PasswordChange::class, function () {
+describe(\PasswordCheck\PasswordChange::class, function () {
     beforeEach(function () {
         \WP_Mock::setUp();
 
-        $this->hibpApi = \Mockery::mock(\HibpCheck\HibpApi::class);
-        $this->passwordChange = new \HibpCheck\PasswordChange($this->hibpApi, new \Dxw\Iguana\Value\Post([]));
+        $this->hibpApi = \Mockery::mock(\PasswordCheck\HibpApi::class);
+        $this->passwordChange = new \PasswordCheck\PasswordChange($this->hibpApi, new \Dxw\Iguana\Value\Post([]));
 
         $this->mockPasswordChange = function ($return, $__post) {
-            $hibpApi = \Mockery::mock(\HibpCheck\HibpApi::class, function ($mock) use ($return) {
+            $hibpApi = \Mockery::mock(\PasswordCheck\HibpApi::class, function ($mock) use ($return) {
                 $mock->shouldReceive('passwordIsPwned')
                 ->with('password')
                 ->andReturn($return);
             });
-            $this->passwordChange = new \HibpCheck\PasswordChange($hibpApi, new \Dxw\Iguana\Value\Post($__post));
+            $this->passwordChange = new \PasswordCheck\PasswordChange($hibpApi, new \Dxw\Iguana\Value\Post($__post));
         };
 
         $this->mockUser = function ($password) {
@@ -34,7 +34,7 @@ describe(\HibpCheck\PasswordChange::class, function () {
         };
 
         \WP_Mock::wpFunction('__', [
-            'args' => ['<strong>ERROR</strong>: This password has been found on a list of publicly known passwords.', 'hibp-check'],
+            'args' => ['<strong>ERROR</strong>: This password has been found on a list of publicly known passwords.', 'password-check'],
             'return' => 'l10n password message',
         ]);
     });
@@ -100,7 +100,7 @@ describe(\HibpCheck\PasswordChange::class, function () {
             });
 
             it('complains', function () {
-                $this->mockErrors([['hibp-check-found', 'l10n password message']]);
+                $this->mockErrors([['password-check-breached', 'l10n password message']]);
                 $this->passwordChange->userProfileUpdateErrors($this->errors, null, $this->user);
             });
         });
@@ -158,7 +158,7 @@ describe(\HibpCheck\PasswordChange::class, function () {
             });
 
             it('complains', function () {
-                $this->mockErrors([['hibp-check-found', 'l10n password message']]);
+                $this->mockErrors([['password-check-breached', 'l10n password message']]);
                 $this->passwordChange->validatePasswordReset($this->errors, $this->user);
             });
         });

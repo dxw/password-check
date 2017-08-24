@@ -1,8 +1,8 @@
-# hibp-check
+# password-check
 
 WordPress plugin to check password resets against haveibeenpwned.com
 
-https://wordpress.org/plugins/hibp-check/
+https://wordpress.org/plugins/password-check/
 
 ## Licence
 

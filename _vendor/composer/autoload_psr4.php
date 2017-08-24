@@ -6,7 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'HibpCheck\\' => array($baseDir . '/src'),
+    'PasswordCheck\\' => array($baseDir . '/src'),
     'Dxw\\Result\\' => array($vendorDir . '/dxw/result/src'),
     'Dxw\\Iguana\\' => array($vendorDir . '/dxw/iguana/src'),
     'Aura\\Autoload\\' => array($vendorDir . '/aura/autoload/src'),

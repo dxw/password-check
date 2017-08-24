@@ -1,6 +1,6 @@
 <?php
 
-namespace HibpCheck;
+namespace PasswordCheck;
 
 class HibpApi
 {

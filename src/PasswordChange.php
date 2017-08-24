@@ -1,6 +1,6 @@
 <?php
 
-namespace HibpCheck;
+namespace PasswordCheck;
 
 class PasswordChange implements \Dxw\Iguana\Registerable
 {
@@ -48,6 +48,6 @@ class PasswordChange implements \Dxw\Iguana\Registerable
             return;
         }
 
-        $errors->add('hibp-check-found', __('<strong>ERROR</strong>: This password has been found on a list of publicly known passwords.', 'hibp-check'));
+        $errors->add('password-check-breached', __('<strong>ERROR</strong>: This password has been found on a list of publicly known passwords.', 'password-check'));
     }
 }

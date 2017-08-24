@@ -1,6 +1,6 @@
 <?php
 
-describe(\HibpCheck\HibpApi::class, function () {
+describe(\PasswordCheck\HibpApi::class, function () {
     beforeEach(function () {
         \WP_Mock::setUp();
 
@@ -26,7 +26,7 @@ describe(\HibpCheck\HibpApi::class, function () {
 
     context('(default URL)', function () {
         beforeEach(function () {
-            $this->hibpApi = new \HibpCheck\HibpApi();
+            $this->hibpApi = new \PasswordCheck\HibpApi();
         });
 
         describe('->passwordIsPwned()', function () {
@@ -84,7 +84,7 @@ describe(\HibpCheck\HibpApi::class, function () {
 
     context('(non-default URL)', function () {
         beforeEach(function () {
-            $this->hibpApi = new \HibpCheck\HibpApi('https://password.security.dxw.com/api/v2/pwnedpassword/%s');
+            $this->hibpApi = new \PasswordCheck\HibpApi('https://password.security.dxw.com/api/v2/pwnedpassword/%s');
         });
 
         describe('->passwordIsPwned()', function () {

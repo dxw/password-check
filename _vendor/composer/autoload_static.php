@@ -7,9 +7,9 @@ namespace Composer\Autoload;
 class ComposerStaticInit93dc33cbba0bc6ab43aa60f4d30224dd
 {
     public static $prefixLengthsPsr4 = array (
-        'H' => 
+        'P' => 
         array (
-            'HibpCheck\\' => 10,
+            'PasswordCheck\\' => 14,
         ),
         'D' => 
         array (
@@ -23,7 +23,7 @@ class ComposerStaticInit93dc33cbba0bc6ab43aa60f4d30224dd
     );
 
     public static $prefixDirsPsr4 = array (
-        'HibpCheck\\' => 
+        'PasswordCheck\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
