@@ -32,6 +32,11 @@ describe(\HibpCheck\PasswordChange::class, function () {
                 }
             });
         };
+
+        \WP_Mock::wpFunction('__', [
+            'args' => ['Password has been found in a dump. Please choose another.', 'hibp-check'],
+            'return' => 'l10n password message',
+        ]);
     });
 
     afterEach(function () {
@@ -95,7 +100,7 @@ describe(\HibpCheck\PasswordChange::class, function () {
             });
 
             it('complains', function () {
-                $this->mockErrors([['hibp-check-found', 'Password has been found in a dump. Please choose another.']]);
+                $this->mockErrors([['hibp-check-found', 'l10n password message']]);
                 $this->passwordChange->userProfileUpdateErrors($this->errors, null, $this->user);
             });
         });
@@ -153,7 +158,7 @@ describe(\HibpCheck\PasswordChange::class, function () {
             });
 
             it('complains', function () {
-                $this->mockErrors([['hibp-check-found', 'Password has been found in a dump. Please choose another.']]);
+                $this->mockErrors([['hibp-check-found', 'l10n password message']]);
                 $this->passwordChange->validatePasswordReset($this->errors, $this->user);
             });
         });
