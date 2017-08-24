@@ -16,7 +16,7 @@ class PasswordChange implements \Dxw\Iguana\Registerable
         add_action('validate_password_reset', [$this, 'validatePasswordReset'], 20, 2);
     }
 
-    public function userProfileUpdateErrors(\WP_Error $errors, $unused, \WP_User $user)
+    public function userProfileUpdateErrors(\WP_Error $errors, $unused, $user)
     {
         if (!isset($user->user_pass)) {
             return;
@@ -25,7 +25,7 @@ class PasswordChange implements \Dxw\Iguana\Registerable
         $this->checkPass($errors, $user->user_pass);
     }
 
-    public function validatePasswordReset(\WP_Error $errors, \WP_User $user)
+    public function validatePasswordReset(\WP_Error $errors, $user)
     {
         $this->checkPass($errors, $this->post['pass1']);
     }
