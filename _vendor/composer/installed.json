@@ -1,0 +1,132 @@
+[
+    {
+        "name": "aura/autoload",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/auraphp/Aura.Autoload.git",
+            "reference": "306a7f8d3cb58fb6f94bcff1dddf20c543f68668"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/auraphp/Aura.Autoload/zipball/306a7f8d3cb58fb6f94bcff1dddf20c543f68668",
+            "reference": "306a7f8d3cb58fb6f94bcff1dddf20c543f68668",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-10-03T19:36:19+00:00",
+        "type": "library",
+        "extra": {
+            "aura": {
+                "type": "library"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Aura\\Autoload\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Aura.Autoload Contributors",
+                "homepage": "https://github.com/auraphp/Aura.Autoload/contributors"
+            }
+        ],
+        "description": "Provides a PSR-4 compliant autoloader implementation.",
+        "homepage": "https://github.com/auraphp/Aura.Autoload",
+        "keywords": [
+            "PSR-4",
+            "SPL autoloader",
+            "autoload",
+            "autoloader",
+            "class loader"
+        ]
+    },
+    {
+        "name": "dxw/iguana",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/dxw/iguana.git",
+            "reference": "bbbcc299a316400724c09a7bfec24cae3305d32d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/dxw/iguana/zipball/bbbcc299a316400724c09a7bfec24cae3305d32d",
+            "reference": "bbbcc299a316400724c09a7bfec24cae3305d32d",
+            "shasum": ""
+        },
+        "require": {
+            "aura/autoload": "^2.0"
+        },
+        "require-dev": {
+            "10up/wp_mock": "^0.1.1",
+            "mikey179/vfsstream": "^1.6",
+            "phpunit/phpunit": "4.8.*"
+        },
+        "time": "2016-07-08T19:48:23+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Dxw\\Iguana\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "homepage": "https://github.com/dxw/iguana"
+    },
+    {
+        "name": "dxw/result",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/dxw/result.git",
+            "reference": "f4162f94234f3444dcbc1612889f6e2bfabc03ec"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/dxw/result/zipball/f4162f94234f3444dcbc1612889f6e2bfabc03ec",
+            "reference": "f4162f94234f3444dcbc1612889f6e2bfabc03ec",
+            "shasum": ""
+        },
+        "require-dev": {
+            "fabpot/php-cs-fixer": "1.11.4",
+            "peridot-php/leo": "^1.5",
+            "peridot-php/peridot": "^1.18"
+        },
+        "time": "2016-07-19T13:32:11+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Dxw\\Result\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Tom Adams",
+                "email": "tom@dxw.com",
+                "homepage": "https://www.dxw.com/"
+            }
+        ],
+        "description": "Result values",
+        "homepage": "https://github.com/dxw/result"
+    }
+]

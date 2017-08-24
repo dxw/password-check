@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b020e461230df15aa696a8cfb8a77f69",
+    "content-hash": "5cec14df52e84a08b87c97b96c3f5867",
     "packages": [
         {
             "name": "aura/autoload",
@@ -390,38 +390,6 @@
                 "parser"
             ],
             "time": "2014-09-09T13:34:57+00:00"
-        },
-        {
-            "name": "dxw/phar-install",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dxw/phar-install.git",
-                "reference": "7cdc3081296a1009393382ccb338461a747e5732"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dxw/phar-install/zipball/7cdc3081296a1009393382ccb338461a747e5732",
-                "reference": "7cdc3081296a1009393382ccb338461a747e5732",
-                "shasum": ""
-            },
-            "bin": [
-                "bin/phar-install"
-            ],
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tom Adams",
-                    "email": "tom@dxw.com",
-                    "homepage": "http://dxw.com"
-                }
-            ],
-            "homepage": "https://github.com/dxw/phar-install",
-            "time": "2016-02-17T13:55:06+00:00"
         },
         {
             "name": "errors/exceptions",
