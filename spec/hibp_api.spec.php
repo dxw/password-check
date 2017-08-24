@@ -88,24 +88,24 @@ describe(\HibpCheck\HibpApi::class, function () {
         });
 
         describe('->passwordIsPwned()', function () {
-                beforeEach(function () {
-                    $this->password = 'password';
-                    $this->mockIsWpErrorAndReturn(false);
-                    \WP_Mock::wpFunction('wp_remote_get', [
-                        'args' => [
-                            'https://password.security.dxw.com/api/v2/pwnedpassword/'.sha1($this->password),
-                        ],
-                        'return' => [
-                            'response' => ['code' => 200],
-                        ],
-                    ]);
-                });
-
-                it('returns true', function () {
-                    $result = $this->hibpApi->passwordIsPwned($this->password);
-                    expect($result->isErr())->to->be->false();
-                    expect($result->unwrap())->to->equal(true);
-                });
+            beforeEach(function () {
+                $this->password = 'password';
+                $this->mockIsWpErrorAndReturn(false);
+                \WP_Mock::wpFunction('wp_remote_get', [
+                    'args' => [
+                        'https://password.security.dxw.com/api/v2/pwnedpassword/'.sha1($this->password),
+                    ],
+                    'return' => [
+                        'response' => ['code' => 200],
+                    ],
+                ]);
             });
+
+            it('returns true', function () {
+                $result = $this->hibpApi->passwordIsPwned($this->password);
+                expect($result->isErr())->to->be->false();
+                expect($result->unwrap())->to->equal(true);
+            });
+        });
     });
 });
