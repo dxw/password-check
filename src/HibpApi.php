@@ -4,7 +4,7 @@ namespace PasswordCheck;
 
 class HibpApi
 {
-    private static $defaultUrl = 'https://haveibeenpwned.com/api/v2/pwnedpassword/%s?originalPasswordIsAHash=true';
+    private static $defaultUrl = 'https://haveibeenpwned.com/api/v2/pwnedpassword/%s';
 
     public function __construct(string $url = null)
     {

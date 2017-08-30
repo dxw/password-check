@@ -7,7 +7,7 @@ describe(\PasswordCheck\HibpApi::class, function () {
         $this->mockRequestAndReturn = function ($return) {
             \WP_Mock::wpFunction('wp_remote_get', [
                 'args' => [
-                    'https://haveibeenpwned.com/api/v2/pwnedpassword/'.sha1($this->password).'?originalPasswordIsAHash=true',
+                    'https://haveibeenpwned.com/api/v2/pwnedpassword/'.sha1($this->password),
                 ],
                 'return' => $return,
             ]);
