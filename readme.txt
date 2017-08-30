@@ -5,7 +5,7 @@ License: MIT
 License URI: https://opensource.org/licenses/MIT
 Requires PHP: 7
 
-Checks password resets against haveibeenpwned.com, preventing users from using breached passwords
+Prevents the use of breached passwords by sending passwords to haveibeenpwned.com to be checked
 
 == Description ==
 
