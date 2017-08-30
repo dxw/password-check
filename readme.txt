@@ -21,7 +21,7 @@ If the `PASSWORD_CHECK_URL` constant is unset, all passwords will be sent to hav
 
 Step 1:
 
-If you're okay with all passwords being sent to haveibeenpwned.com, you can skip this step.
+If you want all passwords to be sent to haveibeenpwned.com, you can skip this step.
 
 However, if you want to use your own API, set the `PASSWORD_CHECK_URL` constant in your `wp-config.php` file. Example:
 
@@ -32,6 +32,15 @@ However, if you want to use your own API, set the `PASSWORD_CHECK_URL` constant 
 Step 2:
 
 Install the plugin and activate it.
+
+Step 3:
+
+WordPress has a minimum password length of 1, and passwords are hashed using an MD5-based algorithm instead of a real password hashing algorithm (such as bcrypt, scrypt, or PBKDF2).
+
+We recommend addressing those issues, but we don't recommend a particular plugin. However if you think WordPress should have these (basic) features, you should register your interest on the tickets:
+
+- https://core.trac.wordpress.org/ticket/21022
+- https://core.trac.wordpress.org/ticket/35817
 
 == Development ==
 
