@@ -18,7 +18,9 @@ class HibpApi
     public function passwordIsPwned(string $password) : \Dxw\Result\Result
     {
         $url = $this->getUrl($password);
-        $response = wp_remote_get($url);
+        $response = wp_remote_get($url, [
+            'user-agent' => 'https://github.com/dxw/password-check',
+        ]);
         if (is_wp_error($response)) {
             return \Dxw\Result\Result::err($response->get_error_message());
         }

@@ -8,6 +8,9 @@ describe(\PasswordCheck\HibpApi::class, function () {
             \WP_Mock::wpFunction('wp_remote_get', [
                 'args' => [
                     'https://haveibeenpwned.com/api/v2/pwnedpassword/'.sha1($this->password),
+                    [
+                        'user-agent' => 'https://github.com/dxw/password-check',
+                    ],
                 ],
                 'return' => $return,
             ]);
@@ -94,6 +97,9 @@ describe(\PasswordCheck\HibpApi::class, function () {
                 \WP_Mock::wpFunction('wp_remote_get', [
                     'args' => [
                         'https://password.security.dxw.com/api/v2/pwnedpassword/'.sha1($this->password),
+                        [
+                            'user-agent' => 'https://github.com/dxw/password-check',
+                        ],
                     ],
                     'return' => [
                         'response' => ['code' => 200],
