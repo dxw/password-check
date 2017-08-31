@@ -65,7 +65,7 @@ describe(\PasswordCheck\HibpApi::class, function () {
                 });
             });
 
-            context('when the API is broken', function () {
+            context('when the API is broken (transport error)', function () {
                 beforeEach(function () {
                     $this->password = 'password';
                     $error = \Mockery::mock(\WP_Error::class, function ($mock) {
@@ -80,6 +80,22 @@ describe(\PasswordCheck\HibpApi::class, function () {
                     $result = $this->hibpApi->passwordIsPwned($this->password);
                     expect($result->isErr())->to->be->true();
                     expect($result->getErr())->to->equal('A valid URL was not provided.');
+                });
+            });
+
+            context('when the API is broken (non-200/-404 response)', function () {
+                beforeEach(function () {
+                    $this->password = "hello this is a rather good password don't you think?";
+                    $this->mockRequestAndReturn([
+                        'response' => ['code' => 500],
+                    ]);
+                    $this->mockIsWpErrorAndReturn(false);
+                });
+
+                it('returns error', function () {
+                    $result = $this->hibpApi->passwordIsPwned($this->password);
+                    expect($result->isErr())->to->be->true();
+                    expect($result->getErr())->to->equal('got unexpected status code: 500');
                 });
             });
         });

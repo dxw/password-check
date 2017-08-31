@@ -25,7 +25,15 @@ class HibpApi
             return \Dxw\Result\Result::err($response->get_error_message());
         }
 
-        return \Dxw\Result\Result::ok($response['response']['code'] === 200);
+        $code = $response['response']['code'];
+
+        if ($code === 200) {
+            return \Dxw\Result\Result::ok(true);
+        } elseif ($code === 404) {
+            return \Dxw\Result\Result::ok(false);
+        }
+
+        return \Dxw\Result\Result::err(sprintf("got unexpected status code: %d", $code));
     }
 
     private function getUrl(string $password) : string
