@@ -58,7 +58,7 @@ describe(\PasswordCheck\HibpApi::class, function () {
                     $this->mockIsWpErrorAndReturn(false);
                 });
 
-                it('returns true', function () {
+                it('returns false', function () {
                     $result = $this->hibpApi->passwordIsPwned($this->password);
                     expect($result->isErr())->to->be->false();
                     expect($result->unwrap())->to->equal(false);
