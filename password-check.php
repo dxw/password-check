@@ -2,8 +2,8 @@
 /*
 Plugin Name: Password Check
 Plugin URI: https://github.com/dxw/password-check
-Description: Checks passwords against haveibeenpwned.com, preventing users from using breached passwords
-Version: 0.1.0
+Description: Prevents the use of breached passwords by sending passwords to haveibeenpwned.com to be checked
+Version: 1
 Author: dxw
 Author URI: https://www.dxw.com
 */

@@ -7,7 +7,10 @@ describe(\PasswordCheck\HibpApi::class, function () {
         $this->mockRequestAndReturn = function ($return) {
             \WP_Mock::wpFunction('wp_remote_get', [
                 'args' => [
-                    'https://haveibeenpwned.com/api/v2/pwnedpassword/'.sha1($this->password).'?originalPasswordIsAHash=true',
+                    'https://haveibeenpwned.com/api/v2/pwnedpassword/'.sha1($this->password),
+                    [
+                        'user-agent' => 'https://github.com/dxw/password-check',
+                    ],
                 ],
                 'return' => $return,
             ]);
@@ -55,14 +58,14 @@ describe(\PasswordCheck\HibpApi::class, function () {
                     $this->mockIsWpErrorAndReturn(false);
                 });
 
-                it('returns true', function () {
+                it('returns false', function () {
                     $result = $this->hibpApi->passwordIsPwned($this->password);
                     expect($result->isErr())->to->be->false();
                     expect($result->unwrap())->to->equal(false);
                 });
             });
 
-            context('when the API is broken', function () {
+            context('when the API is broken (transport error)', function () {
                 beforeEach(function () {
                     $this->password = 'password';
                     $error = \Mockery::mock(\WP_Error::class, function ($mock) {
@@ -77,6 +80,22 @@ describe(\PasswordCheck\HibpApi::class, function () {
                     $result = $this->hibpApi->passwordIsPwned($this->password);
                     expect($result->isErr())->to->be->true();
                     expect($result->getErr())->to->equal('A valid URL was not provided.');
+                });
+            });
+
+            context('when the API is broken (non-200/-404 response)', function () {
+                beforeEach(function () {
+                    $this->password = "hello this is a rather good password don't you think?";
+                    $this->mockRequestAndReturn([
+                        'response' => ['code' => 500],
+                    ]);
+                    $this->mockIsWpErrorAndReturn(false);
+                });
+
+                it('returns error', function () {
+                    $result = $this->hibpApi->passwordIsPwned($this->password);
+                    expect($result->isErr())->to->be->true();
+                    expect($result->getErr())->to->equal('got unexpected status code: 500');
                 });
             });
         });
@@ -94,6 +113,9 @@ describe(\PasswordCheck\HibpApi::class, function () {
                 \WP_Mock::wpFunction('wp_remote_get', [
                     'args' => [
                         'https://password.security.dxw.com/api/v2/pwnedpassword/'.sha1($this->password),
+                        [
+                            'user-agent' => 'https://github.com/dxw/password-check',
+                        ],
                     ],
                     'return' => [
                         'response' => ['code' => 200],
