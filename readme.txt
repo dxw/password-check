@@ -11,7 +11,7 @@ Prevents the use of breached passwords by sending passwords to haveibeenpwned.co
 
 This plugin sends all changed password hashes to haveibeenpwned.com's API to check whether they've been breached or not. If a password has been breached, the user is unable to set it as their password. Passwords are only checked when being set or changed, not every time a user logs in.
 
-Using this plugin will send your hashed, unreadable password to haveibeenpwned.com in order to complete the check. If you're concerned about doing that, you can set up your own API with their data in order to do the checks privately.
+Using this plugin will send the user's password (hashed with SHA1) to haveibeenpwned.com in order to complete the check. If you're concerned about doing that, you can set up your own API with their data in order to do the checks privately.
 
 To do this, set the `PASSWORD_CHECK_URL` constant to the URL of your API endpoint:
 
