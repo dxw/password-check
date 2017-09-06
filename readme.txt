@@ -19,6 +19,12 @@ To do this, set the `PASSWORD_CHECK_URL` constant to the URL of your API endpoin
 
 If the `PASSWORD_CHECK_URL` constant is unset, all passwords will be sent to haveibeenpwned.com.
 
+== Is this secure? ==
+
+[Security products don't have to be perfect, they just have to be better than not using them.](https://www.troyhunt.com/password-managers-dont-have-to-be-perfect-they-just-have-to-be-better-than-not-having-one/) Our guess is that for most WordPress sites they will gain more security from avoiding known compromised passwords than they will lose from submitting the passwords to HIBP.
+
+If submitting hashed passwords to HIBP is too much of a risk, you can use your own API (see installation instructions for how to do this).
+
 == Installation ==
 
 Step 1:
