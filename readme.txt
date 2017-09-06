@@ -5,13 +5,15 @@ License: MIT
 License URI: https://opensource.org/licenses/MIT
 Requires PHP: 7
 
-Prevents the use of breached passwords by sending passwords to haveibeenpwned.com to be checked
+Prevents the use of breached passwords by sending passwords to haveibeenpwned.com to be checked.
 
 == Description ==
 
-This plugin sends all changed passwords to haveibeenpwned.com's API to check whether they've been breached or not. If a password has been breached, the user is unable to set it as their password. Passwords are only checked when being set or changed, not every time a user logs in.
+This plugin sends all changed password hashes to haveibeenpwned.com's API to check whether they've been breached or not. If a password has been breached, the user is unable to set it as their password. Passwords are only checked when being set or changed, not every time a user logs in.
 
-It's possible to use your own API by setting the `PASSWORD_CHECK_URL` constant:
+Using this plugin will send your hashed, unreadable password to haveibeenpwned.com in order to complete the check. If you're concerned about doing that, you can set up your own API with their data in order to do the checks privately.
+
+To do this, set the `PASSWORD_CHECK_URL` constant to the URL of your API endpoint:
 
 `define('PASSWORD_CHECK_URL', 'https://my-website.invalid/api/v2/pwnedpassword/%s');`
 
@@ -35,7 +37,7 @@ Install the plugin and activate it.
 
 Step 3:
 
-WordPress has a minimum password length of 1, and passwords are hashed using an MD5-based algorithm instead of a real password hashing algorithm (such as bcrypt, scrypt, or PBKDF2).
+WordPress has a minimum password length of 1, and passwords are hashed using an MD5-based algorithm instead of a more secure password hashing algorithm (such as bcrypt, scrypt, or PBKDF2).
 
 We recommend addressing those issues, but we don't recommend a particular plugin. However if you think WordPress should have these (basic) features, you should register your interest on the tickets:
 
